@@ -1,4 +1,15 @@
-var app=angular.module('myApp',[]);
-app.controller('mycontroller',function($scope){ 
-    $scope.name="lavanya"
-});
+
+"StudentController", function($scope) {
+        $scope.name = "john";
+        $scope.department = "Computer Science";
+        $scope.semester = 3;
+
+        //aray
+        $scope.students =[
+            "AMULYA E",
+            "AKSHAY U SHET",
+            "AMRUTHA H S",
+            "AYUSH KUMAR K S",
+        ];
+    }
+);
