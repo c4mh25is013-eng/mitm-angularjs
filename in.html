@@ -1,84 +1,85 @@
-
 <!DOCTYPE html>
-<html ng-app="studentApp"> <!-- Start AngularJS Application -->
+<html  lang="en" ng-app="studentApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Student Management Mini Application</title>
-    <!-- AngularJS CDN Library -->
-    <script src="[link removed]"></script>
-    <script src="app.js"></script>
-    
+  <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management Mini Application</title>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="app.js"></script>
+  
 </head>
-<body ng-controller="CollegeController"> <!-- Parent Controller -->
+<body ng-controller="CollegeController">
 
-    <!-- Header Area -->
-    <header class="section">
-        <h1>{{ collegeName }}</h1> <!-- Displayed from parent controller -->
-        <h2>Student Management System</h2>
-    </header>
+  <!-- Header Section -->
+  <div class="card">
+    <h1>{{ collegeName }}</h1>
+    <h2>Student Management Mini Application</h2>
+  </div>
 
-    <!-- Child Controller Section -->
-    <div ng-controller="StudentController">
+  <!-- Student Controller Area -->
+  <div ng-controller="StudentController">
+    
+    <!-- Student Entry Form -->
+    <div class="card">
+      <h3>Student Entry Form</h3>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" ng-model="studentName" placeholder="Enter student name">
+      </div>
+      <div class="form-group">
+        <label for="dept">Department:</label>
+        <input type="text" id="dept" ng-model="department" placeholder="Enter department">
+      </div>
+      <div class="form-group">
+        <label for="sem">Semester:</label>
+        <input type="text" id="sem" ng-model="semester" placeholder="Enter semester">
+      </div>
+      <div class="form-group">
+        <label for="marks">Marks:</label>
+        <input type="number" id="marks" ng-model="marks" placeholder="Enter marks (0-100)">
+      </div>
 
-        <!-- Student Entry Form -->
-        <div class="section">
-            <h3>Student Entry Form</h3>
-            <p>
-                <label>Name: <input type="text" ng-model="name"></label> <!-- ng-model binding -->
-            </p>
-            <p>
-                <label>Department: <input type="text" ng-model="department"></label>
-            </p>
-            <p>
-                <label>Semester: <input type="text" ng-model="semester"></label>
-            </p>
-            <p>
-                <label>Marks: <input type="number" ng-model="marks"></label>
-            </p>
-
-            <!-- Entered Details Preview -->
-            <h4>Live Preview:</h4>
-            <p>Name: {{ name }}</p>
-            <p>Department: {{ department }}</p>
-            <p>Semester: {{ semester }}</p>
-
-            <!-- Action Buttons -->
-            <button ng-click="addStudent()">Add Student</button> <!-- ng-click action -->
-            <button ng-click="toggleDetails()">
-                {{ showDetails ? 'Hide Details' : 'Show Details' }} <!-- Toggle visibility button -->
-            </button>
-        </div>
-
-        <!-- Student Details Section (Show/Hide) -->
-        <div class="section" ng-show="showDetails"> <!-- Controlled via ng-show -->
-            <h3>Detailed Information</h3>
-            <p><strong>Student Name:</strong> {{ name }}</p>
-            <p><strong>Department:</strong> {{ department }}</p>
-            <p><strong>Semester:</strong> {{ semester }}</p>
-        </div>
-
-        <!-- Student List -->
-        <div class="section">
-            <h3>Registered Students List</h3>
-            <ul>
-                <!-- Repeat student list -->
-                <li ng-repeat="student in students">
-                    {{ student }}
-                </li>
-            </ul>
-        </div>
-
-        <!-- Examination Result Area -->
-        <div class="section" ng-if="marks !== null && marks !== undefined">
-            <h3>Examination Result</h3>
-            <!-- Dynamic CSS classes (green for Pass, red for Needs Improvement) -->
-            <p ng-class="{'pass': marks >= 40, 'fail': marks < 40}">
-                <span ng-if="marks >= 40">Pass</span> <!-- Conditional display -->
-                <span ng-if="marks < 40">Needs Improvement</span> <!-- Conditional display -->
-            </p>
-        </div>
-
+      <!-- Real-time Preview -->
+      <h4>Entered Details Preview:</h4>
+      <p><strong>Name:</strong> {{ studentName }}</p>
+      <p><strong>Department:</strong> {{ department }}</p>
+      <p><strong>Semester:</strong> {{ semester }}</p>
     </div>
+
+    <!-- Actions -->
+    <div class="card">
+      <h3>Actions</h3>
+      <button ng-click="addStudent()">Add Student</button>
+      <button ng-click="openDetails()">Show Details</button>
+      <button ng-click="closeDetails()">Hide Details</button>
+    </div>
+
+    <!-- Details Section (Shown/Hidden dynamically) -->
+    <div class="card" ng-show="showDetails">
+      <h3>Student Detailed Overview</h3>
+      <p>This section displays extra details when opened.</p>
+    </div>
+
+    <!-- Student List -->
+    <div class="card">
+      <h3>Student List</h3>
+      <ul>
+        <li ng-repeat="student in students">
+          {{ student }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Examination Result Area -->
+    <div class="card" ng-if="marks !== null && marks !== undefined">
+      <h3>Examination Result</h3>
+      <p ng-class="{'pass': marks >= 40, 'fail': marks < 40}">
+        <span ng-if="marks >= 40">Pass</span>
+        <span ng-if="marks < 40">Needs Improvement</span>
+      </p>
+    </div>
+
+  </div>
 
 </body>
 </html>
